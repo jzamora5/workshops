@@ -1,0 +1,47 @@
+GDB Commands ===================================================
+
+Program must be compiled with -g flag
+
+Some commands can be used by writing just one letter (Letter)
+
+gdb prog = Run program with gdb
+
+breakpoint(b) line/function_name = Sets a breakpoint
+
+run(r) = Executes the program and goes to first breakpoint
+
+start = Puts a breakpoint in main and runs the program
+
+next(n) = Goes to next code instruction
+
+continue(c) = Jumps to next breakpoint
+
+step(s) = Goes into function
+
+print variable = prints a variable on screen
+
+display variable = keeps track of a variable and automatically prints changes
+
+undisplay variable = remove variable from display track
+
+clear line/function_name = clears specific breakpoint
+
+delete breakpoint_number = deletes specific brekpoint
+
+clear = remove all breakpoints
+
+
+GDB + VALGRIND ==================================================
+
+Program must be compiled with -g flag
+
+Terminal 1 **************
+
+valgrind --vgdb=yes --vgdb-error=0 prog
+
+Terminal 2 **************
+
+gdb prog
+(gdb) target remote | vgdb
+
+monitor v.kill = In case valgrind gets stuck
