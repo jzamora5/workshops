@@ -35,7 +35,6 @@ SELECT
 FROM
   employees;
 --  JOIN Query ================
-  -- ALL Places that answer to Steve
 SELECT
   CONCAT(E.first_name, ' ', E.last_name) AS Employee,
   CONCAT(M.first_name, ' ', M.last_name) AS Manager
