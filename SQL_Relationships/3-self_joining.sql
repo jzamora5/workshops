@@ -16,40 +16,19 @@ CREATE TABLE employees (
 );
 -- Insert Data
 -- employees
+SET
+  FOREIGN_KEY_CHECKS = 0;
 INSERT INTO
-  employees (employee_id, first_name, last_name)
+  employees (employee_id, first_name, last_name, manager_id)
 VALUES
-  (1, 'Tang', 'Sophie'),
-  (2, 'Larry', 'Hudson'),
-  (3, 'Peter', 'Parker'),
-  (4, 'Mary', 'Jane'),
-  (5, 'Tony', 'Stark'),
-  (6, 'Steve', 'Rogers');
-SELECT
-  *
-FROM
-  employees;
--- ADD Manager ID =======
-UPDATE
-  employees
+  (1, 'Tang', 'Sophie', 6),
+  (2, 'Larry', 'Hudson', 6),
+  (3, 'Peter', 'Parker', 6),
+  (4, 'Mary', 'Jane', 1),
+  (5, 'Tony', 'Stark', 3),
+  (6, 'Steve', 'Rogers', NULL);
 SET
-  manager_id = 6
-WHERE
-  employee_id IN (1, 2, 3);
--- ==
-UPDATE
-  employees
-SET
-  manager_id = 1
-WHERE
-  employee_id = 4;
--- ==
-UPDATE
-  employees
-SET
-  manager_id = 3
-WHERE
-  employee_id = 5;
+  FOREIGN_KEY_CHECKS = 1;
 -- ==
 SELECT
   *
@@ -64,3 +43,39 @@ FROM
   employees as E
   JOIN employees as M ON E.manager_id = M.employee_id;
 -- ==
+  --  INSERT WITHOUT DISABLING CHECKS ================================================
+  -- INSERT INTO
+  --   employees (employee_id, first_name, last_name)
+  -- VALUES
+  --   (1, 'Tang', 'Sophie'),
+  --   (2, 'Larry', 'Hudson'),
+  --   (3, 'Peter', 'Parker'),
+  --   (4, 'Mary', 'Jane'),
+  --   (5, 'Tony', 'Stark'),
+  --   (6, 'Steve', 'Rogers');
+  -- SELECT
+  --   *
+  -- FROM
+  --   employees;
+  -- -- ADD Manager ID =======
+  -- UPDATE
+  --   employees
+  -- SET
+  --   manager_id = 6
+  -- WHERE
+  --   employee_id IN (1, 2, 3);
+  -- -- ==
+  -- UPDATE
+  --   employees
+  -- SET
+  --   manager_id = 1
+  -- WHERE
+  --   employee_id = 4;
+  -- -- ==
+  -- UPDATE
+  --   employees
+  -- SET
+  --   manager_id = 3
+  -- WHERE
+  --   employee_id = 5;
+  -- ===================================================================
