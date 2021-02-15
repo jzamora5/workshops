@@ -2,6 +2,10 @@ function createCard(cardData) {
   const card = document.createElement("div");
   card.className = "card";
 
+  card.addEventListener("click", () => {
+    console.log(cardData.title);
+  });
+
   const cardPicture = document.createElement("img");
   cardPicture.src = cardData.picture;
   card.append(cardPicture);
