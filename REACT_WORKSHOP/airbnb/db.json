@@ -1,0 +1,77 @@
+{
+    "places": [
+        {
+          "id": 1,
+          "title": "My Home",
+          "price": 80,
+          "perks": { "guests": 2, "bedrooms": 1, "bathrooms": 1 },
+          "owner": "Johnny",
+          "description":
+            "This is a lovely 1 bedroom and 1 bathroom apartment that can accommodate 2 people. It locates at the center of Shanghai and next to subway line 1,1 stop to People Square, 2 stops to Bund, 3 stops to Jingan Temple.",
+          "amenities": ["TV", "Wifi", "Pets"],
+          "reviews": [
+            {
+              "id": 1,
+              "user": "Bob Dylan",
+              "date": "27th January 2017",
+              "review": "Runshi is an epic host. Nothing more I can say. 5 star!"
+            },
+            {
+              "id": 2,
+              "user": "Connor",
+              "date": "4th January 2017",
+              "review": "Highly recommended!"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Tiny House",
+          "price": 65,
+          "perks": { "guests": 4, "bedrooms": 2, "bathrooms": 1 },
+          "owner": "Adrienne",
+          "description":
+            "Our place is a private, affordable stand-alone guest house centrally located just minutes to French Quarters, downtown, the Fair Grounds(Jazz Fest) and City Park. The guest house is a quaint, 400 square ft. with a full bath, mini kitchen, & living room. The extra high ceilings make the home feel more spacious. The sofa converts to a bed also. We have a hand made counter area that adds character to the room and a great porch/deck to relax on and have a glass of Merlot.",
+          "amenities": ["Pets"],
+          "reviews": [
+            {
+              "id": 1,
+              "user": "Max",
+              "date": "15th January 2017",
+              "review":
+                "Fantastic place. It was clean, Adrienne was great (even though we did not meet in person) and everything went super smooth. Location is also greate if you like running and something a bit more quiet. I would suggest a car or take into consideration that you might have to Uber into the city from the location. Overall, would recommend the place anytime."
+            }
+          ]
+        },
+        {
+          "id": 3,  
+          "title": "A suite",
+          "price": 190,
+          "perks": { "guests": 4, "bedrooms": 4, "bathrooms": 3 },
+          "owner": "Lue",
+          "description":
+            "This is a premium quality room located in the most important area of New York. It is close to downtown commerces and has a beatiful sight of central park. You will have all the amenities you desire and will definitely enjoy a great time. By yourself, with your lover, or your family, you will feel luxury from top to bottom.",
+          "amenities": ["TV", "Wifi"],
+          "reviews": [
+            {
+              "id": 1,
+              "user": "Kamie Nean",
+              "date": "6th September 2017",
+              "review": "I felt like a Queen during my stay!"
+            },
+            {
+              "id": 2,
+              "user": "Heman",
+              "date": "5th October 2017",
+              "review": "Beautiful Place."
+            },
+            {
+              "id": 3,
+              "user": "Numa",
+              "date": "15th August 2017",
+              "review": "Great view and service!"
+            }
+          ]
+        }
+      ]
+}
