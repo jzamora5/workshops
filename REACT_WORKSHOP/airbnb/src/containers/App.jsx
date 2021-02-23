@@ -102,10 +102,13 @@ function App() {
 
    */
 
-  useEffect(async () => {
-    const response = await fetch(URL);
-    const places = await response.json();
-    setPlacesList(places);
+  useEffect(() => {
+    //
+    (async () => {
+      const response = await fetch(URL);
+      const places = await response.json();
+      setPlacesList(places);
+    })();
 
     // fetch(URL)
     //   .then((response) => response.json())
