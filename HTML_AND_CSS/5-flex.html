@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        /* flex-direction: column; */
+      }
+
+      .square {
+        width: 200px;
+        height: 200px;
+        background: green;
+        margin: 20px;
+      }
+
+      .container-2 {
+        display: flex;
+        height: 500px;
+        border: 1px solid red;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .rectangle {
+        width: 200px;
+        height: 100px;
+        background: blue;
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .rectangle-2 {
+        width: 100px;
+        height: 50px;
+        background: orange;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
+    <div class="container-2">
+      <div class="rectangle">
+        <div class="rectangle-2"></div>
+      </div>
+    </div>
+  </body>
+</html>
