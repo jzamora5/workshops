@@ -54,6 +54,29 @@ for student, contact_info in query:
           contact_info.city,
           contact_info.phone)
 
+print("*" * 10)
+
+students = session.query(Student).all()
+
+for student in students:
+
+    if student.contact_info:
+        print(student.first_name,
+              student.last_name,
+              student.contact_info.city,
+              student.contact_info.phone)
+
+
+print("*" * 10)
+
+contact_info = session.query(ContactInfo).all()
+for contact in contact_info:
+
+    print(contact.student.first_name,
+          contact.student.last_name,
+          contact.city,
+          contact.phone)
+
 
 session.close()
 
