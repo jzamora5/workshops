@@ -67,3 +67,5 @@ session.close()
 # In ORM Folder
 
 # python3 -m self_join.main
+
+# drop database relationships; create database relationships; use relationships;

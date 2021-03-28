@@ -76,3 +76,5 @@ session.close()
 # In ORM Folder
 
 # python3 -m one_to_many.main
+
+# drop database relationships; create database relationships; use relationships;
