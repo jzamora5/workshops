@@ -62,6 +62,8 @@ for employee in employees:
 
 session.close()
 
+# https://docs.sqlalchemy.org/en/14/orm/self_referential.html
+
 # In ORM Folder
 
 # python3 -m self_join.main

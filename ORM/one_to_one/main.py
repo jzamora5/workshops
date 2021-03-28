@@ -80,6 +80,8 @@ for contact in contact_info:
 
 session.close()
 
+# https://docs.sqlalchemy.org/en/13/orm/basic_relationships.html
+
 # In ORM Folder
 
 # python3 -m one_to_one.main
