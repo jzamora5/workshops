@@ -1,4 +1,3 @@
-from one_to_one.models import contact_info
 from one_to_many.models.customer import Base, Customer
 from one_to_many.models.order import Order
 from sqlalchemy import create_engine

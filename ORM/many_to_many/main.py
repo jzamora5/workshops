@@ -1,26 +1,44 @@
-from one_to_one.models import contact_info
-from one_to_many.models.customer import Base, Customer
-from one_to_many.models.order import Order
+from many_to_many.models.student import Base, Student
+from many_to_many.models.school_class import Class
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-CUSTOMERS = [
-    {"id": 1, "name": "Tang"},
-    {"id": 2, "name": "Larry"},
-    {"id": 3, "name": "Peter"},
-    {"id": 4, "name": "Mary"},
-    {"id": 5, "name": "Tony"},
-    {"id": 6, "name": "Steve"},
+STUDENTS = [
+    {"id": 1, "first_name": "Tang", "last_name": "Sophie"},
+    {"id": 2, "first_name": "Larry", "last_name": "Hudson"},
+    {"id": 3, "first_name": "Peter", "last_name": "Parker"},
+    {"id": 4, "first_name": "Mary", "last_name": "Jane"},
+    {"id": 5, "first_name": "Tony", "last_name": "Stark"},
+    {"id": 6, "first_name": "Steve", "last_name": "Rogers"},
 ]
 
-ORDERS = [
-    {"id": 1, "customer_id": 1},
-    {"id": 2, "customer_id": 1},
-    {"id": 3, "customer_id": 1},
-    {"id": 4, "customer_id": 6},
-    {"id": 5, "customer_id": 6},
-    {"id": 6, "customer_id": 6},
+CLASSES = [
+    {"id": 1, "title": 'Math', "class_desc": 'Learn the beauty of numbers'},
+    {"id": 2, "title": 'Physics', "class_desc": 'Discover how the world works'},
+    {"id": 3, "title": 'Chemistry', "class_desc": 'Learn to master the elements'},
+    {"id": 4, "title": 'Philosophy', "class_desc": 'What is the meaning of life?'},
+    {"id": 5, "title": 'English', "class_desc": 'Reinforce your language'},
+]
+
+
+STUDENT_CLASSES = [
+    {"student_id": 1, "class_id": 1},
+    {"student_id": 1, "class_id": 3},
+    {"student_id": 1, "class_id": 5},
+    {"student_id": 2, "class_id": 2},
+    {"student_id": 2, "class_id": 4},
+    {"student_id": 3, "class_id": 1},
+    {"student_id": 3, "class_id": 2},
+    {"student_id": 3, "class_id": 3},
+    {"student_id": 3, "class_id": 4},
+    {"student_id": 3, "class_id": 5},
+    {"student_id": 4, "class_id": 2},
+    {"student_id": 5, "class_id": 2},
+    {"student_id": 5, "class_id": 3},
+    {"student_id": 5, "class_id": 4},
+    {"student_id": 6, "class_id": 5},
+    {"student_id": 6, "class_id": 1}
 ]
 
 
@@ -38,38 +56,46 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-for customer in CUSTOMERS:
-    new_customer = Customer(**customer)
-    session.add(new_customer)
+for student in STUDENTS:
+    new_student = Student(**student)
+    session.add(new_student)
 
-for order in ORDERS:
-    new_order = Order(**order)
-    session.add(new_order)
+for db_class in CLASSES:
+    new_class = Class(**db_class)
+    session.add(new_class)
+
+for student_class in STUDENT_CLASSES:
+    student = session.query(Student).get(student_class["student_id"])
+    db_class = session.query(Class).get(student_class["class_id"])
+    student.classes.append(db_class)
+
 
 session.commit()
 
 
-query = session.query(Customer, Order).join(Order)
+print("*" * 10)
 
-for customer, order in query:
-    print(customer.name,
-          order.id)
+students = session.query(Student).all()
+
+for student in students:
+    if student.classes:
+        for school_class in student.classes:
+            print(student.first_name,
+                  student.last_name,
+                  school_class.title,
+                  school_class.class_desc)
 
 print("*" * 10)
 
-customers = session.query(Customer).all()
+school_classes = session.query(Class).all()
 
-for customer in customers:
-    if customer.orders:
-        for order in customer.orders:
-            print(customer.name, order.id)
-
-print("*" * 10)
-
-orders = session.query(Order).all()
-for order in orders:
-
-    print(order.customer.name, order.id)
+for school_class in school_classes:
+    if school_class.students:
+        for student in school_class.students:
+            print(student.first_name,
+                  student.last_name,
+                  school_class.title,
+                  school_class.class_desc)
 
 
 session.close()
@@ -78,4 +104,4 @@ session.close()
 
 # In ORM Folder
 
-# python3 -m one_to_many.main
+# python3 -m many_to_many.main
