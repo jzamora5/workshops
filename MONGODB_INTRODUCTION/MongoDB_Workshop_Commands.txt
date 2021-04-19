@@ -1,0 +1,170 @@
+♦ MongoDB WorkShop Commands
+
+
+♦  If locally: =========================================
+
+sudo service mongod start = Start Service
+
+mongo = Run mongo locally
+
+♦  General =================================================================================
+
+show databases = Shows available databases
+
+use <db_name> = Create / Use database
+
+db.<collection_name>.help() = Shows operations that can be done with a collection
+
+db = Shows database being used currently
+
+db.dropDatabase() = Drops the database that is currently being used
+
+.pretty() = Can be added to queries in order to get a better looking result
+
+
+**** CRUD =======================================================================================
+
+With mydb as database and participants as collection
+
+♦ INSERT DATA ==============================================================================================================================================================
+
+_id is auto generated if not specified (THE FIELD IS NOT SIMPLY id, IT MUST INCLUDE THE UNDERSCORE)
+
+db.participants.insertOne({name: "Larry", age: 25, height: 1.75, programs: ["foundations", "web stack"], pdata: {phone: "123456789", address: "Buena Vibra Street"}})
+
+
+db.participants.insertMany([
+	{name: "Larry", age: 25, height: 1.75, programs: ["foundations", "web stack"], pdata: {phone: "123456789", address: "Buena Vibra Street"}},
+	{name: "Erika", age: 21, height: 1.60, programs: ["foundations", "machine learning"], pdata: {phone: "987654321", address: "World Center"}},
+	{name: "Jackson", age: 18, height: 1.65, programs: ["foundations", "ar vr"], pdata: {phone: "987321654", address: "Mk Hall"}}
+	])
+
+
+WITH SPECIFIC ID
+
+db.participants.insertOne({_id: 1, name: "Larry", age: 25, height: 1.75, programs: ["foundations", "web stack"], pdata: {phone: "123456789", address: "Buena Vibra Street"}})
+
+
+ALTERNATIVE INSERT WITH insert (Deprecated in some programming languages drivers)
+
+db.participants.insert({name: "Larry", age: 25, height: 1.75, programs: ["foundations", "web stack"], pdata: {phone: "123456789", address: "Buena Vibra Street"}})
+
+db.participants.insert([
+	{name: "Larry", age: 25, height: 1.75, programs: ["foundations", "web stack"], pdata: {phone: "123456789", address: "Buena Vibra Street"}},
+	{name: "Erika", age: 21, height: 1.60, programs: ["foundations", "machine learning"], pdata: {phone: "987654321", address: "World Center"}}
+	])
+	
+db.participants.insertOne({name: "Larry", age: 30, height: 1.80, programs: ["foundations", "web stack"], pdata: {phone: "123456789", address: "Buena Vibra Street"}})
+
+
+♦ READ DATA ============================================================================================================================================================== 
+
+Get all documents in collection
+
+db.participants.find({}) 
+
+# Find by id
+
+db.inventory.findOne({_id: ObjectId("5f9af4db6749deffdb10e47b")})
+
+# Find single with arguments
+
+db.participants.findOne({name: "Larry"})
+
+# Find Multiple based on argument(s)
+
+db.participants.find({name: "Larry"})
+
+db.participants.find({name: "Larry", age: 30})
+
+
+# Operators
+
+Comparison Query Operators
+$eq -> Matches values that are equal to a specified value.
+$gt -> Matches values that are greater than a specified value.
+$gte -> Matches values that are greater than or equal to a specified value.
+$in -> Matches any of the values specified in an array.
+$lt -> Matches values that are less than a specified value.
+$lte -> Matches values that are less than or equal to a specified value.
+$ne -> Matches all values that are not equal to a specified value.
+$nin -> Matches none of the values specified in an array.
+
+
+db.participants.find( { height: { $lt: 1.7 } } )
+
+# Logical AND 
+
+db.participants.find( { $and: [{height: { $lt: 1.7 }}, {height: {$gt: 1.6} }] })
+
+
+# Logical OR
+
+db.participants.find( { $or: [{height: 1.6 }, {height: {$gt: 1.7} }] })
+
+
+♦ UPDATE DATA ============================================================================================================================================================== 
+
+# Update Inner Object
+
+db.participants.updateOne(
+   { name: "Larry", age: 30 },
+   {
+     $set: { height: 1.80},
+   })
+
+
+# Update inner Array
+
+db.participants.updateOne(
+   { name: "Larry", age: 30 },
+   {
+     $set: { "programs.1": "retired"},
+   })
+
+# Update Inner Object
+
+db.participants.updateOne(
+   { name: "Larry", age: 30 },
+   {
+     $set: { "pdata.address": "New Address"},
+   })
+
+
+# Update Many
+
+
+db.participants.updateMany(
+   { name: "Larry"},
+   {
+     $set: { height: 2.0}
+   })
+
+
+
+♦ DELETE DATA ============================================================================================================================================================== 
+
+
+ALWAYS RECOMMENDED TO DO FIND BEFORE DELETE !!!!!
+
+
+db.participants.findOne({name: "Erika"})
+
+# Delete a single documents
+
+db.participants.deleteOne({name: "Erika"})
+
+
+
+db.participants.find({name: "Larry"})
+
+# Delete Many documents
+
+db.participants.deleteMany({name: "Larry"})
+
+
+db.participants.find({})
+
+# Delete all documents in Collection
+
+db.participants.deleteMany({})
