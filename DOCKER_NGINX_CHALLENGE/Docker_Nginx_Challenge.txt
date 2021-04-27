@@ -1,0 +1,82 @@
+🐳🐳🐳🐳 RUN NGINX IMAGE FROM DOCKER HUB
+
+docker run nginx = Run nginx image (will be downloaded if not found locally)
+
+***Container will be run and remain hanging)
+
+docker run -d --name nginx_challenge -p 8080:80 nginx = Run in detached mode and with correct port configuration
+
+***Container Should be running in the background
+
+docker images = Check which images are availble locally
+
+docker ps = Check which containers are running
+
+
+*** If by mistake you stopped the container you can do 
+
+docker start nginx_challenge = Command to run existing container if not running
+
+** To check what containers are available even if they are not running use
+docker ps -a
+
+
+🐳🐳🐳🐳 GET INTO THE CONTAINER OF THE IMAGE TO MODIFY IT
+
+
+docker exec -ti nginx_challenge bash = Run bash in container to get shell 
+
+**Beware the user will be root by default
+
+service nginx status = Check if nginx is running (Should work in your computer in localhost:8080)
+
+
+🌑🌑🌑 Modify the file /usr/share/nginx/html/index.html to get your own custom HTML 
+
+
+🐳🐳🐳🐳 BUILD AN IMAGE FROM THE MODIFIED Container
+
+
+docker commit nginx_challenge = Build image from container
+
+docker images = Check if image was created (And get ID)
+
+docker tag <image_id> my_custom_nginx = Tags the image
+
+*** Tag when creating 
+docker commit <container> <tag>
+
+🐳🐳🐳🐳 UPLOAD TO DOCKER HUB
+
+docker push my_custom_nginx
+
+‼‼ Oops 
+denied: requested access to the resource is denied
+**You must tag your image with your Docker Hub user for it to work
+
+docker images = List images to get the id of your custom image to re tag it
+
+docker tag <image_id> <user_name>/my_custom_nginx = Re tagging image
+
+** You will probably now have 2 images (2 commits in reality), so remove the old one
+
+docker rmi -f my_custom_nginx = Removing old image
+
+**Push should work now
+
+docker push <user_name>/my_custom_nginx
+
+**If it still does not work, you may have to log in with "docker login" command
+
+
+🐳🐳🐳🐳 VERIFY IF CUSTOM IMAGE IS ONLINE
+
+docker rmi -f $(docker images -a -q) = Remove all images just to make sure (Not required really)
+
+docker run -d --name my_custom_container -p 8080:80 <user_name>/my_custom_nginx 
+
+docker ps = Check if container is running
+
+**Access localhost:8080 in browser and you should see your custom html being served
+
+🐳 Rejoice because docker is awesome 🐳
